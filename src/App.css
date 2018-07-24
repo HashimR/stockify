@@ -1,0 +1,26 @@
+body {
+  background-color: #eaeaea
+}
+
+.App {
+  text-align: left;    
+}
+
+.App-logo {
+  height: 80px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.App-header {
+  background-color: #fff;
+  font-size: x-large;
+  height: 80px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  color: black;
+}
+
+.App-intro {
+  font-size: large;
+}
