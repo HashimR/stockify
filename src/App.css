@@ -3,7 +3,7 @@ body {
 }
 
 .App {
-  text-align: left;    
+  text-align: center;    
 }
 
 .App-logo {
@@ -15,7 +15,7 @@ body {
 .App-header {
   background-color: #fff;
   font-size: x-large;
-  height: 80px;
+  height: 95 px;
   padding-bottom: 10px;
   padding-top: 10px;
   color: black;
@@ -23,4 +23,13 @@ body {
 
 .App-intro {
   font-size: large;
+}
+
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
 }
