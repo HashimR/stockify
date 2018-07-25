@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import {
-  Card,
-  CardActions,
-  CardMedia,
-  CardText,
-  CardHeader
-} from "material-ui/Card";
-import FlatButton from "material-ui/FlatButton";
+import { Card, CardActions, CardMedia, CardText } from "material-ui/Card";
+import RaisedButton from "material-ui/RaisedButton";
 import PropTypes from "prop-types";
 import logo from "../../assets/logos/alphabet.png";
+import Divider from "material-ui/Divider";
 
 class StockDisplayCard extends Component {
   render() {
@@ -19,29 +14,30 @@ class StockDisplayCard extends Component {
           <CardMedia style={styles.media}>
             <img src={logo} alt="" />
           </CardMedia>
-          <CardText style={styles.title}>
-            Alphabet Inc.
+
+          <CardText style={styles.title}>Alphabet Inc.</CardText>
+          <CardText style={styles.subtitle}>Ticker: GOOG</CardText>
+          <Divider style={styles.hardDivider} />
+
+          <CardText style={styles.priceTitle}>Today's Opening</CardText>
+          <Divider />
+          <CardText style={styles.priceTitle}>1240.00</CardText>
+          <Divider style={styles.softDivider} />
+
+          <CardText style={styles.priceTitle}>
+            Tomorrow's Predicted Opening
           </CardText>
-          <CardText style={styles.subtitle}>
-            Ticker: GOOG
-          </CardText>
+          <Divider />
+          <CardText style={styles.priceTitle}>1180.00</CardText>
+
           <CardActions>
-            <FlatButton label="Action1" />
-            <FlatButton label="Action2" />
+            <RaisedButton label="Predict" secondary={true} />
           </CardActions>
-          <CardText expandable={true}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec
-            vulputate interdum sollicitudin. Nunc lacinia auctor quam sed
-            pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque
-            lobortis odio.
-          </CardText>
         </Card>
       </div>
     );
   }
 }
-
 const styles = {
   title: {
     fontSize: "25px",
@@ -53,8 +49,22 @@ const styles = {
     fontWeight: "lighter",
     height: "20px"
   },
+  priceTitle: {
+    fontSize: "20px",
+    height: "20px"
+  },
   media: {
     height: "150px"
+  },
+  hardDivider: {
+    height: "2px",
+    backgroundColor: "black"
+  },
+  softDivider: {
+    height: "2px"
+  },
+  button: {
+    color: "white"
   }
 };
 

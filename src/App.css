@@ -19,7 +19,6 @@ body {
   padding-bottom: 10px;
   padding-top: 10px;
   color: black;
-  font-weight: 
 }
 
 .App-body {
@@ -50,4 +49,5 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
   max-width: 20%;
+  height: 400px;
 }
