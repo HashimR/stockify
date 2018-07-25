@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
+import {
+  Card,
+  CardActions,
+  CardMedia,
+  CardText,
+  CardHeader
+} from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 import PropTypes from "prop-types";
+import logo from "../../assets/logos/alphabet.png";
 
 class StockDisplayCard extends Component {
   render() {
@@ -9,11 +16,15 @@ class StockDisplayCard extends Component {
     return (
       <div className="card">
         <Card>
-          <CardHeader
-            title={this.props.name}
-            subtitle="Subtitle"
-            avatar="placeholder"
-          />
+          <CardMedia style={styles.media}>
+            <img src={logo} alt="" />
+          </CardMedia>
+          <CardText style={styles.title}>
+            Alphabet Inc.
+          </CardText>
+          <CardText style={styles.subtitle}>
+            Ticker: GOOG
+          </CardText>
           <CardActions>
             <FlatButton label="Action1" />
             <FlatButton label="Action2" />
@@ -30,6 +41,22 @@ class StockDisplayCard extends Component {
     );
   }
 }
+
+const styles = {
+  title: {
+    fontSize: "25px",
+    fontWeight: "bold",
+    paddingBottom: "0px"
+  },
+  subtitle: {
+    fontSize: "15px",
+    fontWeight: "lighter",
+    height: "20px"
+  },
+  media: {
+    height: "150px"
+  }
+};
 
 StockDisplayCard.propTypes = {
   name: PropTypes.string.isRequired
