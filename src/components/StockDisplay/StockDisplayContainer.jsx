@@ -6,7 +6,7 @@ export default class StockDisplay extends Component {
   render() {
     return (
       <div>
-        <StockDisplayCard name="Google" />
+        <StockDisplayCard stock="goog" />
       </div>
     );
   }

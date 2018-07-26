@@ -1,8 +1,8 @@
 import React from "react";
 import "../../App.css";
-import Header from "../common/Header"
-import StockDisplay from "../StockDisplay/StockDisplayContainer"
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Header from "../common/Header";
+import StockDisplay from "../StockDisplay/StockDisplayContainer";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 export default class Homepage extends React.Component {
   render() {
@@ -11,7 +11,7 @@ export default class Homepage extends React.Component {
         <MuiThemeProvider>
           <Header />
           <div className="App-body">
-          <StockDisplay />
+            <StockDisplay />
           </div>
         </MuiThemeProvider>
       </div>
