@@ -1,10 +1,12 @@
 import flask
+from flask_cors import CORS
 import io
 import stock_data_generator as sdg
 import recurrent_neural_network as rnn
 
 app = flask.Flask(__name__)
 model = None
+CORS(app)
 
 @app.route("/predict", methods=["GET"])
 def predict():
@@ -15,8 +17,11 @@ def predict():
         stock = request.args.get('stock')
         if stock:
             sdg.generate_test_data(stock)
-            data = rnn.predict(stock)[0][0].tolist()
-    return flask.jsonify(data)
+            print("Generated stock")
+            data = rnn.predict(stock)[0][0]
+            formatted_price = ("%.2f" % data)
+            print("Predicted")
+    return flask.jsonify(price = formatted_price)
 
 if __name__ == "__main__":
     print(("* Loading Keras model and starting server..."))
