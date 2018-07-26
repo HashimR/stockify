@@ -8,6 +8,7 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from keras.layers import Dropout
 from keras.models import load_model
+from keras import backend as K
 
 def generate_model(stock_code):
     # ------ Data Preprocessing ------
@@ -58,7 +59,7 @@ def predict(stock_code):
     scaler_filename = stock_code + ".scaler"
     sc = joblib.load(scaler_filename) 
     
-    regressor = load_model("./" + stock_code + ".model")
+    regressor = load_regressor(stock_code)
     dataset_test = pd.read_csv("test_data_" + stock_code + ".csv")
 
     dataset_total = dataset_test['close']
@@ -73,4 +74,8 @@ def predict(stock_code):
 
     predicted_stock_price = regressor.predict(X_test)
     predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+    K.clear_session()
     return predicted_stock_price
+
+def load_regressor(stock_code):
+    return load_model("./" + stock_code + ".model")
