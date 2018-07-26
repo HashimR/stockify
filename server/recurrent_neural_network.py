@@ -13,7 +13,7 @@ def generate_model(stock_code):
     # ------ Data Preprocessing ------
     filename = "training_data_" + stock_code + ".csv"
     dataset_train = pd.read_csv(filename)
-    training_set = dataset_train.iloc[:, 1:2].values
+    training_set = dataset_train.iloc[:, 4:5].values
     
     # Feature Scaling
 
@@ -60,17 +60,17 @@ def predict(stock_code):
     
     regressor = load_model("./" + stock_code + ".model")
     dataset_test = pd.read_csv("test_data_" + stock_code + ".csv")
-    real_stock_price = dataset_test.iloc[:, 1:2].values
-    
-    dataset_total = dataset_test['open']
+
+    dataset_total = dataset_test['close']
     inputs = dataset_total[len(dataset_total) - 60:].values
     inputs = inputs.reshape(-1, +1)
     inputs = sc.transform(inputs)
-    
+
     X_test = []
     X_test.append(inputs[0:60, 0])
     X_test = np.array(X_test)
     X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+
     predicted_stock_price = regressor.predict(X_test)
     predicted_stock_price = sc.inverse_transform(predicted_stock_price)
     return predicted_stock_price
