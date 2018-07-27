@@ -12,16 +12,29 @@ class StockDisplayCard extends Component {
 
     this.state = {
       predictedPrice: "-",
+      previousOpen: "-",
+      previousClose: "-",
+      previousDate: "-",
       predictClicked: false
     };
     this.predict = this.predict.bind(this);
   }
 
+  componentDidMount() {
+    axios.get("https://api.iextrading.com/1.0/stock/goog/chart").then(res => {
+      const data = res.data[res.data.length - 1];
+      this.setState({
+        previousOpen: data["open"],
+        previousClose: data["close"],
+        previousDate: data["date"]
+      });
+    });
+  }
+
   predict() {
     axios.get("http://127.0.0.1:5000/predict?stock=goog").then(res => {
       this.setState({
-        predictedPrice: res.data["price"],
-        predictClicked: true
+        predictedPrice: res.data["price"]
       });
     });
   }
@@ -40,20 +53,23 @@ class StockDisplayCard extends Component {
           <CardText style={styles.subtitle}>
             Ticker: {stocks[this.props.stock].subtitle}
           </CardText>
-          <Divider style={styles.hardDivider} />
+          
+          <CardText style={styles.date}>
+            {this.state.previousDate}
+          </CardText>
 
-          <CardText style={styles.priceTitle}>Previous Open</CardText>
-          <Divider />
-          <CardText style={styles.priceTitle}>1240.00</CardText>
-          <CardText style={styles.priceTitle}>Previous Close</CardText>
-          <Divider />
-          <CardText style={styles.priceTitle}>1240.00</CardText>
-          <Divider style={styles.softDivider} />
+          <CardText style={styles.priceTitle}>Open</CardText>
+          <CardText style={styles.price}>
+            {this.state.previousOpen}
+          </CardText>
+
+          <CardText style={styles.priceTitle}>Close</CardText>
+          <CardText style={styles.price}>
+            {this.state.previousClose}
+          </CardText>
 
           <CardText style={styles.priceTitle}>Next Predicted Close</CardText>
-          <Divider />
-
-          <CardText style={styles.priceTitle}>
+          <CardText style={styles.price}>
             {this.state.predictedPrice}
           </CardText>
 
@@ -61,7 +77,7 @@ class StockDisplayCard extends Component {
             <RaisedButton
               label="Predict"
               secondary={true}
-              disabled={this.predictClicked}
+              disabled={this.state.predictClicked}
               onClick={this.predict}
             />
           </CardActions>
@@ -84,6 +100,10 @@ const stocks = {
 };
 
 const styles = {
+  date: {
+    backgroundColor: "#1496BB",
+    color: "white"
+  },
   title: {
     fontSize: "25px",
     fontWeight: "bold",
@@ -95,6 +115,11 @@ const styles = {
     height: "20px"
   },
   priceTitle: {
+    fontSize: "20px",
+    height: "20px",
+    fontWeight: "bold"
+  },
+  price: {
     fontSize: "20px",
     height: "20px"
   },
